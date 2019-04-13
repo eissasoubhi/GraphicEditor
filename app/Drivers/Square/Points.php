@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Drivers\Circle;
+namespace App\Drivers\Square;
 
 use App\Drivers\DriverAbstract;
 use App\Drivers\BinaryRendererTrait;
 
-class Binary extends DriverAbstract
+class Points extends DriverAbstract
 {
     use BinaryRendererTrait, BinaryDrawerTrait;
 

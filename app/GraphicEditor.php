@@ -34,10 +34,10 @@ class GraphicEditor
     public function draw(FormatAbstract $format)
     {
         foreach ($this->shapes as $shape) {
-            $draw = $this->driver_factory->create($shape, $format);
-            $draw->render();
+            $driver = $this->driver_factory->create($shape, $format);
+            $format = $driver->render();
         }
 
-        return $format->getResource();
+        return $format->getResponse();
     }
 }

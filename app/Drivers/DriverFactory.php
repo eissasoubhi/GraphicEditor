@@ -3,6 +3,7 @@
 namespace App\Drivers;
 
 use App\Shapes\ShapeAbstract;
+use App\Format\FormatAbstract;
 
 /**
  *
@@ -10,10 +11,10 @@ use App\Shapes\ShapeAbstract;
 class DriverFactory
 {
 
-    public function create(ShapeAbstract $shape, string $driver_name, int $width, int $height)
+    public function create(ShapeAbstract $shape, FormatAbstract $format)
     {
         $_shape = (new \ReflectionClass($shape))->getShortName();
-        $_driver = ucfirst($driver_name);
+        $_driver = (new \ReflectionClass($format))->getShortName();
 
         $class = 'App\\Drivers\\'.$_shape.'\\'.$_driver;
 
@@ -21,6 +22,6 @@ class DriverFactory
             throw new \Exception("The driver $_driver for the shape $_shape is not implimented", 1);
         }
 
-        return new $class($shape, $width, $height);
+        return new $class($shape, $format);
     }
 }

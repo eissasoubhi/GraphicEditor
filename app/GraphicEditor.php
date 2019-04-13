@@ -2,8 +2,10 @@
 
 namespace App;
 
-use App\Shapes\ShapeFactory;
 use App\Drivers\DriverFactory;
+use App\Shape\ShapeAbstract;
+use App\Format\FormatAbstract;
+use App\Shapes\ShapeFactory;
 
 /**
  *
@@ -25,22 +27,17 @@ class GraphicEditor
     public function load(array $shapes_array)
     {
         foreach ($shapes_array as $shape_data) {
-            $this->shapes[] = $this->shape_factory->create($shape_data);
+            $this->shapes[] = $this->shape_factory->create($shape_data['type'], $shape_data);
         }
     }
 
-    public function draw($driver_name)
+    public function draw(FormatAbstract $format)
     {
-        $resource = null;
-        $shift_x = 0;
-
         foreach ($this->shapes as $shape) {
-            $driver = $this->driver_factory->create($shape, $driver_name, 700, 700);
-            // dd($driver->draw($resource, $shift_x));
-            list($resource, $shift_x) = $driver->draw($resource, $shift_x);
-
+            $draw = $this->driver_factory->create($shape, $format);
+            $draw->render();
         }
-        // dd($resource);
-        return $resource;
+
+        return $format->getResource();
     }
 }

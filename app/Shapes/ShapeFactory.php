@@ -8,17 +8,17 @@ namespace App\Shapes;
 class ShapeFactory
 {
 
-    public function create(array $shape_data): ShapeAbstract
+    public function create($type, array $attributes): ShapeAbstract
     {
-        $class = 'App\\Shapes\\'.ucfirst($shape_data['type']);
+        $class = 'App\\Shapes\\'.ucfirst(strtolower($type));
 
         $type = $this->getClassShortName($class);
 
         if (! class_exists($class)) {
-            throw new \Exception("The shape of type $type does not exist", 500);
+            throw new \RuntimeException("The shape of type $type does not exist");
         }
 
-        return new $class($shape_data);
+        return new $class($attributes);
     }
 
     protected function getClassShortName($class) {

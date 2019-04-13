@@ -2,33 +2,26 @@
 
 namespace App\Drivers\Square;
 
-use App\Drivers\BinaryDriver;
+use App\Drivers\DriverAbstract;
 
-/**
- *
- */
-class Binary extends BinaryDriver
+class Binary extends DriverAbstract
 {
-    public function draw($resource, $shift_x)
+    public function draw()
     {
-        // dd($shift_x);
-        $this->setResource($resource);
+        $color = [0, 0, 0];
+        if ($this->shape->has('border.color')) {
+            $color = $this->shape->get('border.color')->getValue();
+        }
 
-        $border_width = $this->shape->getAttribute('border')['width'];
-        $border_overflow = $border_width/2;
-        imagesetthickness($this->getResource(), $border_width);
-
-        $border_color = $this->getBorderColor();
+        $color = \imagecolorallocate($this->format->getResource(), $color[0], $color[1], $color[2]);
 
         \imagerectangle(
-            $this->getResource(),
-            $shift_x+$border_overflow ,
-            $border_overflow ,
-            $this->shape->getAttribute('sideLength')+$shift_x+$border_overflow ,
-            $this->shape->getAttribute('sideLength'),
-            $border_color
+            $this->format->getResource(),
+            $this->format->getCurrentXposition(),
+            $this->format->getCurrentYposition(),
+            $this->format->getCurrentXposition() + $this->shape->get('sideLength'),
+            $this->format->getCurrentYposition() + $this->shape->get('sideLength'),
+            $color
         );
-
-        return [$this->getResource(), $this->shape->getAttribute('sideLength')+$shift_x+$border_width];
     }
 }

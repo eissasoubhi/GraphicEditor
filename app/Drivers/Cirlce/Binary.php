@@ -2,42 +2,28 @@
 
 namespace App\Drivers\Circle;
 
-use App\Drivers\BinaryDriver;
+use App\Drivers\DriverAbstract;
 
-/**
- *
- */
-class Binary extends BinaryDriver
+class Binary extends DriverAbstract
 {
-
-    public function draw($resource, $shift_x)
+    public function draw()
     {
-        $this->setResource($resource);
+        $color = [0, 0, 0];
+        if ($this->shape->has('border.color')) {
+            $color = $this->shape->get('border.color')->getValue();
+        }
 
-        $border_width = $this->shape->getAttribute('border')['width'];
-        $border_overflow = $border_width/2;
-        imagesetthickness($this->getResource(), $border_width);
+        $color = \imagecolorallocate($this->format->getResource(), $color[0], $color[1], $color[2]);
 
-        $border_color = $this->getBorderColor();
-
-        imagearc(
-            $this->getResource(),
-            ($this->calculateDiameter() / 2)+$shift_x+$border_overflow , // x
-            $this->calculateDiameter() / 2+$border_overflow , // y
-            $this->calculateDiameter(),
-            $this->calculateDiameter(),
+        \imagearc(
+            $this->format->getResource(),
+            $this->format->getCurrentXposition() + ($this->shape->getWidth() / 2),
+            $this->format->getCurrentYposition() + ($this->shape->getWidth() / 2),
+            $this->shape->getWidth(),
+            $this->shape->getWidth(),
             0,
             360,
-            $border_color
+            $color
         );
-
-        return [$this->getResource(), $this->calculateDiameter()+$shift_x+$border_width ];
     }
-
-
-    public function calculateDiameter()
-    {
-        return $this->shape->getAttribute('perimeter') / pi();
-    }
-
 }

@@ -8,7 +8,7 @@ trait BinaryDrawerTrait {
     {
         $color = [0, 0, 0];
         if ($this->shape->has('border.color')) {
-            $color = $this->shape->get('border.color')->getValue();
+            $color = $this->shape->get('border.color');
         }
 
         $color = \imagecolorallocate($this->format->getResource(), $color[0], $color[1], $color[2]);

@@ -3,28 +3,42 @@
 namespace App\Shapes;
 
 use Illuminate\Support\Arr;
-use App\Shapes\Attributes\Color;
+use App\Shapes\Attributes\AttributeFactory;
+use App\Shapes\Attributes\AttributeAbstract;
 
 abstract class ShapeAbstract
 {
     protected $attributes = [];
 
-    final public function __construct(array $attributes)
+    protected $attribute_factory;
+
+    final public function __construct(array $attributes, AttributeFactory $attribute_factory)
     {
+        $this->attribute_factory = $attribute_factory;
+
         if ($this->validate($attributes)) {
-            foreach ($attributes as $name => $value) {
+            $this->attributes = $this->checkInstanciableAttributes($attributes);
+        }
+    }
 
-                if ($name == 'border' && isset($value['color'])) {
-                    $value['color'] = new Color($value['color']);
+    protected function checkInstanciableAttributes($attributes)
+    {
+
+        foreach ($attributes as $name => $value) {
+
+            if (is_array($value)) {
+                $attributes[$name] = $this->checkInstanciableAttributes($value);
+            } else {
+
+                if ($this->attribute_factory->attributeExists($name)) {
+                    $value = $this->attribute_factory->create($name, $value);
                 }
 
-                if ($name == 'color' ) {
-                    $value = new Color($value);
-                }
-
-                $this->attributes[$name] = $value;
+                $attributes[$name] = $value;
             }
         }
+
+        return $attributes;
     }
 
     abstract public function validate(array $attributes);
@@ -44,7 +58,16 @@ abstract class ShapeAbstract
             throw new \LogicException("Attribute {$key} is not defined");
         }
 
-        return Arr::get($this->attributes, $key);
+        $keys = explode('.', $key);
+        $name = end($keys);
+
+        $value = Arr::get($this->attributes, $key);
+
+        if ($value instanceof AttributeAbstract) {
+            return $value->getValue();
+        }
+
+        return $value;
     }
 
     public function getBorderWidth()

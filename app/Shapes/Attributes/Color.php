@@ -5,10 +5,8 @@ namespace App\Shapes\Attributes;
 /**
  *
  */
-class Color
+class Color extends AttributeAbstract
 {
-    protected $value;
-    protected $original;
     public static $names = [
         'aliceblue' => '#F0F8FF',
         'antiquewhite' => '#FAEBD7',
@@ -158,8 +156,9 @@ class Color
         'yellow' => '#FFFF00',
         'yellowgreen' => '#9ACD32',
     ];
-    function __construct($value)
-    {
+
+     public function setValue($value)
+     {
         if (is_array($value) && count($value) == 3) {
             $this->value = $value;
         } elseif (is_string($value) && strlen($value) == 7 && strpos($value, '#') !== FALSE) {
@@ -169,9 +168,7 @@ class Color
         } else {
             throw new Exception("The color $value does not exist", 1);
         }
-
-        $this->original = $value;
-    }
+     }
 
      public function getValue()
      {

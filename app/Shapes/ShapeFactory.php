@@ -2,6 +2,7 @@
 
 namespace App\Shapes;
 
+use App\Shapes\Attributes\AttributeFactory;
 /**
  *
  */
@@ -18,7 +19,7 @@ class ShapeFactory
             throw new \RuntimeException("The shape of type $type does not exist");
         }
 
-        return new $class($attributes);
+        return new $class($attributes, new AttributeFactory);
     }
 
     protected function getClassShortName($class) {

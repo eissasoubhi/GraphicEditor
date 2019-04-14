@@ -11,8 +11,6 @@ trait BinaryRendererTrait {
     {
         $editor = $this->format;
 
-        imagesetthickness($editor->getResource(), $this->shape->getBorderWidth());
-
         $this->presetEditorPosition();
 
         $this->draw();

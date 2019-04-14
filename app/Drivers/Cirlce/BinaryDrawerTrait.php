@@ -6,6 +6,8 @@ trait BinaryDrawerTrait {
 
     public function draw()
     {
+        imagesetthickness($this->format->getResource(), $this->shape->getBorderWidth());
+
         $color = [0, 0, 0];
         if ($this->shape->has('border.color')) {
             $color = $this->shape->get('border.color');

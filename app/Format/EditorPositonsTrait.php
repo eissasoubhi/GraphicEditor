@@ -39,11 +39,11 @@ trait EditorPositonsTrait {
             return 0;
         }
 
-        $longest_shape = array_reduce($this->rended_shapes, function ($max, $current)
+        $biggest_y = array_reduce($this->rended_shapes, function ($max, $current)
         {
-            return $current > $max ? $current : $max;
+            return $current->getHeight(true) > $max ? $current->getHeight(true) : $max;
         });
 
-        return $longest_shape->getHeight(true);
+        return $biggest_y;
     }
 }

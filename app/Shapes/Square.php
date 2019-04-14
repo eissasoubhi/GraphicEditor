@@ -10,6 +10,10 @@ class Square extends ShapeAbstract
 
     public function validate(array $attributes)
     {
+        if (! isset($attributes['sideLength'])) {
+            throw new \LogicException("Please define 'sideLength' of the square");
+        }
+
         return true;
     }
 

@@ -11,6 +11,10 @@ class Circle extends ShapeAbstract
 
     public function validate(array $attributes)
     {
+        if (! isset($attributes['perimeter'])) {
+            throw new \LogicException("Please define 'perimeter' of the circle");
+        }
+
         return true;
     }
 

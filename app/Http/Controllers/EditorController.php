@@ -11,6 +11,11 @@ use App\Format\Points;
 class EditorController extends Controller
 {
 
+    /**
+     * draw the given shaps and display them in one of the diffrent format.
+     *
+     * @return Illuminate\Http\Response
+     */
     public function draw()
     {
         $data = $this->getData();

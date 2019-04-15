@@ -3,10 +3,13 @@
 namespace App\Shapes\Attributes;
 
 /**
- *
+ * Manage all the diffrent types of the color value
  */
 class Color extends AttributeAbstract
 {
+    /**
+     * @var array
+     */
     public static $names = [
         'aliceblue' => '#F0F8FF',
         'antiquewhite' => '#FAEBD7',
@@ -157,7 +160,10 @@ class Color extends AttributeAbstract
         'yellowgreen' => '#9ACD32',
     ];
 
-     public function setValue($value)
+    /**
+     * @param string $value
+     */
+     public function setValue(string $value)
      {
         if (is_array($value) && count($value) == 3) {
             $this->value = $value;
@@ -170,6 +176,9 @@ class Color extends AttributeAbstract
         }
      }
 
+    /**
+     * @return string
+     */
      public function getValue()
      {
          return $this->value;

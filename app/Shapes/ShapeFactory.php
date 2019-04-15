@@ -9,7 +9,12 @@ use App\Shapes\Attributes\AttributeFactory;
 class ShapeFactory
 {
 
-    public function create($type, array $attributes): ShapeAbstract
+    /**
+     * @param string $type
+     * @param array $attributes
+     * @return App\Shapes\ShapeAbstract
+     */
+    public function create(string $type, array $attributes): ShapeAbstract
     {
         $class = 'App\\Shapes\\'.ucfirst(strtolower($type));
 
@@ -21,8 +26,11 @@ class ShapeFactory
 
         return new $class($attributes, new AttributeFactory);
     }
-
-    protected function getClassShortName($class) {
+    /**
+     * @param string $class
+     * @return string
+     */
+    protected function getClassShortName(string $class) {
         $namespace = explode('\\', $class);
         return array_pop($namespace);
     }

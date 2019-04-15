@@ -9,6 +9,12 @@ use App\Shapes\ShapeAbstract;
 class Circle extends ShapeAbstract
 {
 
+    /**
+     * check if the circle has the required attributes
+     *
+     * @param array $attributes
+     * @return bool
+     */
     public function validate(array $attributes)
     {
         if (! isset($attributes['perimeter'])) {
@@ -18,12 +24,20 @@ class Circle extends ShapeAbstract
         return true;
     }
 
-    protected function width($border_width)
+    /**
+     * @param string $border_width
+     * @return int
+     */
+    protected function width(int $border_width)
     {
         return $this->get('perimeter') / pi() + $border_width;
     }
 
-    protected function height($border_width)
+    /**
+     * @param string $border_width
+     * @return int
+     */
+    protected function height(int $border_width)
     {
         return $this->get('perimeter') / pi() + $border_width;
     }

@@ -2,8 +2,14 @@
 
 namespace App\Drivers\Square;
 
+/**
+ * This trait functions are shared between both the Binary and the Points drivers of squares.
+ */
 trait BinaryDrawerTrait {
 
+    /**
+     * draw a cirlcle in the canvas.
+     */
     public function draw()
     {
 

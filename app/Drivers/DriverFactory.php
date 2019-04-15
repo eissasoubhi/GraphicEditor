@@ -5,12 +5,14 @@ namespace App\Drivers;
 use App\Shapes\ShapeAbstract;
 use App\Format\FormatAbstract;
 
-/**
- *
- */
 class DriverFactory
 {
 
+    /**
+     * @param App\Shapes\ShapeAbstract $shape
+     * @param App\Shapes\FormatAbstract $format
+     * @return App\Drivers\DriverAbstract
+     */
     public function create(ShapeAbstract $shape, FormatAbstract $format)
     {
         $_shape = (new \ReflectionClass($shape))->getShortName();

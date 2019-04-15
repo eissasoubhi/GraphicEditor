@@ -8,7 +8,12 @@ namespace App\Shapes\Attributes;
 class AttributeFactory
 {
 
-    public function create($name, $value): AttributeAbstract
+    /**
+     * @param string $name
+     * @param string $value
+     * @return App\Shapes\Attributes\AttributeAbstract
+     */
+    public function create(string $name, string $value): AttributeAbstract
     {
         $class = 'App\\Shapes\\Attributes\\'.ucfirst(strtolower($name));
 
@@ -21,12 +26,20 @@ class AttributeFactory
         return new $class($value);
     }
 
-    public function attributeExists($name)
+    /**
+     * @param string $name
+     * @return bool
+     */
+    public function attributeExists(string $name)
     {
         return class_exists('App\\Shapes\\Attributes\\'.ucfirst(strtolower($name)));
     }
 
-    protected function getClassShortName($class) {
+    /**
+     * @param string $class
+     * @return string
+     */
+    protected function getClassShortName(string $class) {
         $namespace = explode('\\', $class);
         return array_pop($namespace);
     }

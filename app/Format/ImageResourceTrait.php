@@ -2,9 +2,17 @@
 
 namespace App\Format;
 
+/**
+ * This trait functions are shared between both the Binary and the Points format.
+ */
 trait ImageResourceTrait {
 
-    public function activateResource()
+    /**
+     * Creates a canvas image
+     *
+     * @return resource
+     */
+    public function getCanvas()
     {
         $image = \imagecreatetruecolor($this->width, $this->height);
         $color = \imagecolorallocate(

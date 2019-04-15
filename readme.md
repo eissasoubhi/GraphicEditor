@@ -61,7 +61,7 @@ Let's say you wanna add the line shape:
     and **BinaryDrawerTrait.php**.
 	- In Binary.php and Points.php, mostly the only thing to change in them is the 					namespace.
     - In BinaryDrawerTrait.php you define the draw function for the shape Line.
- 2. The last thing is to add the shape app/Shapes/Line.php with the
+ 2. The last thing is to add the shape **app/Shapes/Line.php** with the
     right functions definitions.
 
 ### Add more attributes

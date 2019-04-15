@@ -5,6 +5,7 @@ This project is a simple web coding test as the second step for a job applicatio
 This app is developed with [Lumen](https://lumen.laravel.com/). it should draw geometric shapes such as
 circle, square, rectangle, ellipse... etc. Each shape might have various attributes like border
 color and size, fill color... etc.
+
 **It should support adding more shapes quickly, easily and with minimum code
 changes.** 
 It provides an implementation for the circle and the square shapes.

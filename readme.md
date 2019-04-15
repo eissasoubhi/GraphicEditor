@@ -39,13 +39,19 @@ The color attribute of the shapes can be in three different forms, hex eg: #FF00
 # How is it made?
 
 The application is decoupled to different parts: 
+
 **Drivers**: the implementation of the output for both binary and points types. each shape has its own drivers of both types
+
 **Format**: outputs the result depending on the driver type, each driver type has its own corresponding format.
+
 **Shapes**.
+
 **Shapes attributes.**
+
 **GraphicEditor**: orchestrate the above classes to produce the desired result
 
 The core components are the drivers, so here is how they work:
+
 **The Binary driver**: it simply uses the PHP GD library to draw the shapes.
 
 **The Points driver**: this one is the catch, it should normally display the shape as an array of points (pixels), but the only way could find to do that is by making a binary image first then convert that image later to an array of pixels. 

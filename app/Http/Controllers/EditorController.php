@@ -7,6 +7,7 @@ use App\Shapes\ShapeFactory;
 use App\Drivers\DriverFactory;
 use App\Format\Binary;
 use App\Format\Points;
+use Illuminate\Http\Request;
 
 class EditorController extends Controller
 {
@@ -16,9 +17,9 @@ class EditorController extends Controller
      *
      * @return Illuminate\Http\Response
      */
-    public function draw()
+    public function draw(Request $request)
     {
-        $data = $this->getData();
+        $data = json_decode($request->input('data'), true);
 
         $shapes = $data['shapes'];
 
@@ -26,12 +27,12 @@ class EditorController extends Controller
 
         $editor->load($shapes);
 
-
         return $editor->draw(new Binary(500, 500));
         // return $editor->draw(new Points(500, 500));
 
     }
 
+    // for tests
     public function getData()
     {
         return [

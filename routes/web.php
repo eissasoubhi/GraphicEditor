@@ -16,5 +16,5 @@ $router->get('/', function () use ($router) {
 });
 
 
-$router->get('/draw', 'EditorController@draw');
+$router->post('/draw', 'EditorController@draw');
 

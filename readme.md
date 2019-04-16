@@ -21,7 +21,8 @@ The application also should display the result (i.e. the drawn shapes) in any fo
 
 The first thing we run the server with `php -S localhost:4000 -t public`
 The application exposes an endpoint that receives JSON input.
-**To see the result, you'll have to send a post request to this link [localhost:4000/draw](localhost:4000/draw) with json input in a post parameter with the name 'data'.**
+
+**To see the result, you'll have to send a post request to this link [http://localhost:4000/draw](http://localhost:4000/draw) with json input in a post parameter with the name 'data'.**
 The best way to do that is by using [Postaman](https://chrome.google.com/webstore/detail/postman/fhbjgbiflinjbdggehcddcbncdddomop?hl=en), a pefect app for api calls. 
 
 This is a JSON exmple to send with the post request:
